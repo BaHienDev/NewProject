@@ -29,7 +29,6 @@ public class DamReceiver : MonoBehaviour
     {
         if (this.IsAlive()) return;
         this.Despawn();
-        Debug.Log(transform.parent.name + "Dying");
     }
 
     protected virtual bool IsAlive()
