@@ -235,6 +235,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5797855985157927200, guid: 395897aeec212584e9445eb2b62039da, type: 3}
   m_PrefabInstance: {fileID: 2134846811}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &265371035
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 265371036}
+  - component: {fileID: 265371037}
+  m_Layer: 0
+  m_Name: Despawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &265371036
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265371035}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1976170836}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &265371037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265371035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 252494e23349bf741844f28f535daf75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  despawnLimit: 20
+  distance: 0
+  mainCam: {fileID: 0}
 --- !u!1001 &329735328
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -925,6 +972,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDelay: 0.3
+  fixedTimer: 0
+  delay: 1
 --- !u!1 &1314881032
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,9 +983,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1314881033}
-  - component: {fileID: 1314881034}
   - component: {fileID: 1314881035}
   - component: {fileID: 1314881036}
+  - component: {fileID: 1314881037}
   m_Layer: 0
   m_Name: DamSender
   m_TagString: Untagged
@@ -959,19 +1008,6 @@ Transform:
   m_Father: {fileID: 1976170836}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1314881034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1314881032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e227f3b1d277bf442a1a06fa98e5eb8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 1
 --- !u!65 &1314881035
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1001,6 +1037,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1314881037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314881032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e711fef4e627aed419a0593c33dfcab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 1
+  bulletControl: {fileID: 0}
 --- !u!1 &1318722899
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,6 +1322,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1976170836}
   - component: {fileID: 1976170837}
+  - component: {fileID: 1976170838}
   m_Layer: 0
   m_Name: PlayerBullet
   m_TagString: Untagged
@@ -1293,6 +1344,7 @@ Transform:
   m_Children:
   - {fileID: 1659362403}
   - {fileID: 1314881033}
+  - {fileID: 265371036}
   m_Father: {fileID: 922215721}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
@@ -1348,6 +1400,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1976170838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976170835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab096aa992b46a468fa71bffd342e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  despawn: {fileID: 0}
 --- !u!1 &2010672219
 GameObject:
   m_ObjectHideFlags: 0
