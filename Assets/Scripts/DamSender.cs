@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DamSender : MonoBehaviour
 {
-    public float Damage = 1;
+    public float Damage = 5;
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {

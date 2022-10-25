@@ -25,6 +25,7 @@ public class MovingByCP : MonoBehaviour
 
     protected virtual void LoadCheckpoints()
     {
+        if (checkpoints.Count > 0) return;
         this.checkpointsPath = GameObject.Find("CPMoving").transform;
         foreach (Transform checkpoint in this.checkpointsPath)
         {
@@ -44,7 +45,7 @@ public class MovingByCP : MonoBehaviour
     protected virtual void MoveToNextCP()
     {
         this.checkpointDistance = Vector3.Distance(transform.parent.position, this.CurrentCheckPoint().position);
-        if (this.checkpointDistance <= 0) this.checkpointIndex++;
+        if (this.checkpointDistance <= 0.2f) this.checkpointIndex++;
         if (this.checkpointIndex >= this.checkpoints.Count)
         {
             this.checkpointIndex = this.checkpoints.Count - 1;

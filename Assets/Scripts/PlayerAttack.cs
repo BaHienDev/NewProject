@@ -7,13 +7,7 @@ public class PlayerAttack : MonoBehaviour
     public float attackDelay = 1f;
     public float fixedTimer = 0f;
     public float delay = 1f;
-    // Start is called before the first frame update
-    void Start()
-    {
-           //InvokeRepeating("Attack", 2f, this.attackDelay);
-    }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         this.FixAttacking();

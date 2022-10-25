@@ -7,11 +7,18 @@ public class EnemySpawner : MonoBehaviour
     public List<EnemyCtr> enemies;
     public float timer = 0;
     public float delay = 2f;
+    public Transform enemyHolder;
 
     protected virtual void Start()
     {
+        this.LoadEnemyHolder();
         this.LoadEnemies();
         this.HideAll();
+    }
+
+    protected virtual void LoadEnemyHolder()
+    {
+        this.enemyHolder = GameObject.Find("EnemyHolder").transform;
     }
     protected virtual void FixedUpdate()
     {
@@ -40,6 +47,7 @@ public class EnemySpawner : MonoBehaviour
         this.timer = 0;
         GameObject newEnemy = Instantiate(this.GetEnemy().gameObject);
         newEnemy.name = this.GetEnemy().name;
+        newEnemy.transform.parent = this.enemyHolder;
         newEnemy.SetActive(true);
     }
     protected virtual EnemyCtr GetEnemy()

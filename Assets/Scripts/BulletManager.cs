@@ -6,6 +6,8 @@ public class BulletManager : MonoBehaviour
 {
     public static BulletManager instance;
     public List<Transform> bullets;
+    public Transform bulletHolder;
+    public string holderName = "BulletHolder";
     private void Awake()
     {
         BulletManager.instance = this;
@@ -13,8 +15,14 @@ public class BulletManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        this.LoadBulletHolder();
         this.LoadBullets();
         this.HideAll();
+    }
+
+    protected virtual void LoadBulletHolder()
+    {
+        this.bulletHolder = GameObject.Find(this.holderName).transform;
     }
     protected virtual void LoadBullets()
     {
@@ -28,6 +36,7 @@ public class BulletManager : MonoBehaviour
         Transform bulletPrefabs = this.GetBulletByName(bulletName);
         Transform newBullet = Instantiate(bulletPrefabs);
         newBullet.position = spawnPosition;
+        newBullet.parent = this.bulletHolder;
         return newBullet;
     }
     public virtual Transform GetBulletByName(string bulletName)
