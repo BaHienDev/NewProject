@@ -54,5 +54,4 @@ public class BulletManager : MonoBehaviour
             bullet.gameObject.SetActive(false);
         }
     }
-
 }

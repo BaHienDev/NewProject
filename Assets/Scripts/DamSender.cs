@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class DamSender : MonoBehaviour
 {
-    public float Damage = 5;
+    public float damage = 5;
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {
         DamReceiver damageReceiver = other.GetComponent<DamReceiver>();
         if (damageReceiver == null) return;
-        damageReceiver.Damaged(this.Damage);
+        damageReceiver.Damaged(this.damage);
         this.Despawn();
     }
 
