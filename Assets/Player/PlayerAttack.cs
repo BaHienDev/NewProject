@@ -12,6 +12,7 @@ public class PlayerAttack : MonoBehaviour
     public float delayPerLevel = 0.05f;
     public float minDelay = 0.05f;
     public string bulletName = "PlayerBullet";
+    [SerializeField] protected List<Transform> strikePoint;
 
     protected virtual void Start()
     {
@@ -23,14 +24,43 @@ public class PlayerAttack : MonoBehaviour
     }
     protected virtual void Attack()
     {
-        Transform newBullet = BulletManager.instance.Spawn(this.bulletName, transform.position);
+        if (this.strikePoint.Count <= 0)
+        {
+            this.AttackWithNoStrikePoint();
+            return;
+        }
+        this.AttackWithStrikePoint();
+    }
+    protected virtual void AttackWithNoStrikePoint()
+    {
+        Vector3 shootPosition = transform.position;
+        this.SpawnBullet(shootPosition);
+    }
+    protected virtual void AttackWithStrikePoint()
+    {
+        foreach(Transform strikePoint in this.strikePoint)
+        {
+            Vector3 shootPosition = strikePoint.position;
+            Quaternion shootRotation = strikePoint.rotation;
+            this.SpawnBullet(shootPosition, shootRotation);
+        }
+    }
+    protected virtual Transform SpawnBullet(Vector3 shootPosition, Quaternion shootRotation)
+    {
+        Transform newBullet = this.SpawnBullet(shootPosition);
+        newBullet.rotation = shootRotation;
+        return newBullet;
+    }
+    protected virtual Transform SpawnBullet(Vector3 shootPosition)
+    {
+        Transform newBullet = BulletManager.instance.Spawn(this.bulletName, shootPosition);
         BulletControl bulletControl = newBullet.GetComponent<BulletControl>();
         if (bulletControl == null) Debug.LogError("Missing BulletCtr in new Bullet");
         BulletDamSender damSender = bulletControl.bulletDamSender;
         //damSender.damage = this.GetDamage();
         newBullet.gameObject.SetActive(true);
+        return newBullet;
     }
-
     protected virtual float GetDamage()
     {
         return this.playerController.playerLevel.level;
@@ -40,6 +70,7 @@ public class PlayerAttack : MonoBehaviour
         this.fixedTimer += Time.fixedDeltaTime;
         if (this.fixedTimer < this.Delay()) return;
         this.fixedTimer = 0;
+        this.LoadStrikePoint();
         this.Attack();
     }
     protected virtual float Delay()
@@ -48,5 +79,9 @@ public class PlayerAttack : MonoBehaviour
         this.finalDelay = this.baseDelay - (level * this.delayPerLevel);
         if (this.finalDelay < this.minDelay) this.finalDelay = this.minDelay;
         return this.finalDelay;
+    }
+    protected virtual void LoadStrikePoint()
+    {
+        this.strikePoint = this.playerController.playerModels.StrikePoints();
     }
 }

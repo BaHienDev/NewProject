@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PlayerModels : MonoBehaviour
 {
-    public List<Transform> models;
+    [SerializeField] protected List<Transform> models;
+    [SerializeField] protected List<Transform> strikePoint;
+    public int modelIndex = 0;
+    public string strikePointHolderName = "StrikePoint";
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -31,11 +34,32 @@ public class PlayerModels : MonoBehaviour
     {
         this.HideAll();
         if (index >= this.models.Count) index = this.models.Count - 1;
-        this.models[index].gameObject.SetActive(true);
+        this.modelIndex = index;
+        this.CurrentModel().gameObject.SetActive(true);
+        this.LoadStrikePoint();
     }
     
     protected virtual int LoadFromSaveGame()
     {
         return 0; //TODO NOT SAVE YET
+    }
+    protected virtual void LoadStrikePoint()
+    {
+        this.strikePoint.Clear();
+        Transform currentModel = this.CurrentModel();
+        Transform strikePointHolder = currentModel.Find(this.strikePointHolderName);
+        if (strikePointHolder == null) return;
+        foreach (Transform child in strikePointHolder)
+        {
+            this.strikePoint.Add(child);
+        }
+    }
+    public virtual Transform CurrentModel()
+    {
+        return this.models[this.modelIndex];
+    }
+    public virtual List<Transform> StrikePoints()
+    {
+        return this.strikePoint;
     }
 }
