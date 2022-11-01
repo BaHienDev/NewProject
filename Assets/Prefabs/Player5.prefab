@@ -77,7 +77,6 @@ GameObject:
   - component: {fileID: 2393685229161814999}
   - component: {fileID: 2393685229161814996}
   - component: {fileID: 2393685229161814997}
-  - component: {fileID: 8891664500269599412}
   m_Layer: 0
   m_Name: Player5
   m_TagString: Untagged
@@ -173,32 +172,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &8891664500269599412
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2393685229161814954}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.08, y: 1.13}
-    newSize: {x: 3.08, y: 1.13}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 3.08, y: 1.13}
-  m_EdgeRadius: 0
 --- !u!1 &3042190388085734109
 GameObject:
   m_ObjectHideFlags: 0

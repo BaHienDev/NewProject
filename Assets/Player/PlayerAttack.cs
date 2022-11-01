@@ -56,9 +56,9 @@ public class PlayerAttack : MonoBehaviour
         Transform newBullet = BulletManager.instance.Spawn(this.bulletName, shootPosition);
         BulletControl bulletControl = newBullet.GetComponent<BulletControl>();
         if (bulletControl == null) Debug.LogError("Missing BulletCtr in new Bullet");
-        BulletDamSender damSender = bulletControl.bulletDamSender;
-        //damSender.damage = this.GetDamage();
         newBullet.gameObject.SetActive(true);
+        BulletDamSender damSender = bulletControl.bulletDamSender;
+        damSender.damage = this.GetDamage();
         return newBullet;
     }
     protected virtual float GetDamage()

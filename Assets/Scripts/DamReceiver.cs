@@ -5,7 +5,7 @@ using UnityEngine;
 public class DamReceiver : MonoBehaviour
 {
     public float hp = 0f;
-    public float maxHP = 10f;
+    public float maxHP = 2f;
 
     private void OnEnable()
     {
