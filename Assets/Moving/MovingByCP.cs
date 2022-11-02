@@ -26,7 +26,7 @@ public class MovingByCP : MonoBehaviour
     protected virtual void LoadCheckpoints()
     {
         if (checkpoints.Count > 0) return;
-        this.checkpointsPath = GameObject.Find("CPMoving").transform;
+        this.checkpointsPath = GameObject.Find(transform.parent.name+"CP").transform;
         foreach (Transform checkpoint in this.checkpointsPath)
         {
             this.checkpoints.Add(checkpoint);

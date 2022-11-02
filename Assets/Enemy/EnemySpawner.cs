@@ -52,6 +52,7 @@ public class EnemySpawner : MonoBehaviour
     }
     protected virtual EnemyCtr GetEnemy()
     {
-        return this.enemies[0];
+        int rand = Random.Range(0, this.enemies.Count);
+        return this.enemies[rand];
     }
 }
