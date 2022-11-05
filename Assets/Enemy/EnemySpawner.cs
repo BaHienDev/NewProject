@@ -7,6 +7,8 @@ public class EnemySpawner : MonoBehaviour
     public List<EnemyCtr> enemies;
     public float timer = 0;
     public float delay = 2f;
+    public float finalDelay = 1f;
+    public float minDelay = 0.2f;
     public Transform enemyHolder;
 
     protected virtual void Start()
@@ -43,13 +45,22 @@ public class EnemySpawner : MonoBehaviour
     protected virtual void Spawning()
     {
         this.timer += Time.fixedDeltaTime;
-        if (this.timer < this.delay) return;
+        if (this.timer < this.Delay()) return;
         this.timer = 0;
         GameObject newEnemy = Instantiate(this.GetEnemy().gameObject);
         newEnemy.name = this.GetEnemy().name;
         newEnemy.transform.parent = this.enemyHolder;
         newEnemy.SetActive(true);
     }
+
+    protected virtual float Delay()
+    {
+        int gameLevel = GameLevel.instance.CurrentLevel();
+        this.finalDelay = this.delay - (gameLevel * 0.05f);
+        if (this.finalDelay < this.minDelay) this.finalDelay = this.minDelay;
+        return this.finalDelay;
+    }
+
     protected virtual EnemyCtr GetEnemy()
     {
         int rand = Random.Range(0, this.enemies.Count);

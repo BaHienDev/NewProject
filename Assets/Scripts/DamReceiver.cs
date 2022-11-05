@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DamReceiver : MonoBehaviour
 {
-    public float hp = 0f;
-    public float maxHP = 2f;
+    [SerializeField] protected float hp = 0f;
+    [SerializeField] protected float maxHP = 2f;
 
     private void OnEnable()
     {
@@ -14,8 +14,13 @@ public class DamReceiver : MonoBehaviour
     
     protected virtual void ResetHP()
     {
-        this.hp = this.maxHP;
+        this.hp = this.MaxHP();
     }
+    
+    public virtual float MaxHP()
+    {
+        return this.maxHP;
+    } 
 
     public virtual void Damaged(float damage)
     {

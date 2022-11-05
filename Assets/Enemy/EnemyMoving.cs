@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EnemyMoving : MovingByCP
 {
@@ -19,6 +20,10 @@ public class EnemyMoving : MovingByCP
     protected override void Moving()
     {
         base.Moving();
-        if (this.IsTheEndCP()) this.enemyCtr.despawn.Despawning();
+        if (this.IsTheEndCP())
+        {
+            this.enemyCtr.despawn.Despawning();
+            ScoreManager.instance.Add(ScoreType.EnemyPassed.ToString());
+        }
     }
 }

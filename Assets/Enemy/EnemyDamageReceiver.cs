@@ -7,6 +7,7 @@ public class EnemyDamageReceiver : DamReceiver
     [Header("Enemy")]
     [SerializeField] protected string explosionName = "explosion";
     [SerializeField] protected string explosionSound = "explosionSound";
+    [SerializeField] protected float finalMaxHP = 0;
     protected override void Despawn()
     {
         base.Despawn();
@@ -21,5 +22,12 @@ public class EnemyDamageReceiver : DamReceiver
         explosion.gameObject.SetActive(true);
         Transform explosionSound = FXManager.instance.Spawn(this.explosionSound, pos);
         explosionSound.gameObject.SetActive(true);
+    }
+    public override float MaxHP()
+    {
+        float maxHP = base.MaxHP();
+        int gameLevel = GameLevel.instance.CurrentLevel();
+        this.finalMaxHP = maxHP + gameLevel;
+        return this.finalMaxHP;
     }
 }

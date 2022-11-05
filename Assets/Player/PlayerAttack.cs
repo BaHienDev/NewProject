@@ -63,10 +63,11 @@ public class PlayerAttack : MonoBehaviour
     }
     protected virtual float GetDamage()
     {
-        return this.playerController.playerLevel.level;
+        return this.playerController.playerLevel.CurrentLevel();
     }
     protected virtual void FixAttacking()
     {
+        if (GameOver.instance.IsGameOver()) return;
         this.fixedTimer += Time.fixedDeltaTime;
         if (this.fixedTimer < this.Delay()) return;
         this.fixedTimer = 0;
@@ -75,7 +76,7 @@ public class PlayerAttack : MonoBehaviour
     }
     protected virtual float Delay()
     {
-        int level = this.playerController.playerLevel.level;
+        int level = this.playerController.playerLevel.CurrentLevel();
         this.finalDelay = this.baseDelay - (level * this.delayPerLevel);
         if (this.finalDelay < this.minDelay) this.finalDelay = this.minDelay;
         return this.finalDelay;

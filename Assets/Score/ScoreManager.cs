@@ -12,7 +12,7 @@ public class ScoreManager : MonoBehaviour
         ScoreManager.instance = this;
     }
 
-    public virtual void Add(string key, int value)
+    public virtual void Add(string key, int value = 1)
     {
         Score exitScore = this.Get(key); 
         if(exitScore == null)
