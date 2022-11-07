@@ -7,12 +7,14 @@ public class EnemyDamageReceiver : DamReceiver
     [Header("Enemy")]
     [SerializeField] protected string explosionName = "explosion";
     [SerializeField] protected string explosionSound = "explosionSound";
+    [SerializeField] protected string goldName = "Gold";
     [SerializeField] protected float finalMaxHP = 0;
     protected override void Despawn()
     {
         base.Despawn();
         this.SpawnExplosion();
-        ScoreManager.instance.Add(ScoreType.EnemyKill.ToString(), 1);
+        this.GoldRelease();
+        ScoreManager.instance.Add(ScoreType.EnemyKill.ToString(), 5);
         ScoreManager.instance.Add(ScoreType.Gold.ToString(), 1);
     }
     protected virtual void SpawnExplosion()
@@ -29,5 +31,11 @@ public class EnemyDamageReceiver : DamReceiver
         int gameLevel = GameLevel.instance.CurrentLevel();
         this.finalMaxHP = maxHP + gameLevel;
         return this.finalMaxHP;
+    }
+    protected virtual void GoldRelease()
+    {
+        Vector3 pos = transform.position;
+        Transform gold = GoldSpawn.instance.Spawn(this.goldName, pos);
+        gold.gameObject.SetActive(true);
     }
 }

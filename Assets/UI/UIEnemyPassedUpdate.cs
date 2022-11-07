@@ -25,5 +25,6 @@ public class UIEnemyPassedUpdate : MonoBehaviour
     {
         int remain = GameOver.instance.EnemyRemain();
         this.Text.text = remain.ToString();
+        if (remain <= 0) this.Text.text = 0.ToString();
     }
 }
