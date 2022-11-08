@@ -15,7 +15,6 @@ public class EnemyDamageReceiver : DamReceiver
         this.SpawnExplosion();
         this.GoldRelease();
         ScoreManager.instance.Add(ScoreType.EnemyKill.ToString(), 5);
-        ScoreManager.instance.Add(ScoreType.Gold.ToString(), 1);
     }
     protected virtual void SpawnExplosion()
     {

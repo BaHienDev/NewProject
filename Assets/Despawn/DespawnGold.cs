@@ -10,16 +10,7 @@ public class DespawnGold : DespawnByTime
     }
     public override void DespawnByTiming()
     {
-        DespawnByTime.instance.delay = 4f;
+        DespawnByTime.instance.delay = 2f;
         base.DespawnByTiming();
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            this.Despawning();
-            ScoreManager.instance.Add(ScoreType.Gold.ToString(), 5);
-        }
-    }
-
 }

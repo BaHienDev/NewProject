@@ -27,6 +27,6 @@ public class UIGoldUpdate : MonoBehaviour
         Score gold = ScoreManager.instance.Get(ScoreType.Gold.ToString());
         int goldValue = 0;
         if (gold != null) goldValue = gold.value;
-        this.textGold.text = goldValue.ToString()+" Gold";
+        this.textGold.text = goldValue.ToString();
     }
 }
