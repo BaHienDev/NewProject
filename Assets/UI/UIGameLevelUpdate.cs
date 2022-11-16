@@ -24,6 +24,6 @@ public class UIGameLevelUpdate : MonoBehaviour
     protected virtual void UpdateText()
     {
         int level = GameLevel.instance.CurrentLevel();
-        this.Text.text = "Level:" + level;
+        this.Text.text = "Wave:" + level;
     }
 }
